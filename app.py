@@ -11,7 +11,7 @@ import gradio as gr
 # Load the trained model
 model = pickle.load(open('Extra_tree_classifier.pkl', 'rb'))
 
-def win_quality(fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides, free_sulfur_dioxide, density, sulphates,alcohol):
+def wine_quality(fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides, free_sulfur_dioxide, density, sulphates,alcohol):
     # Prepare the input data as a DataFrame
     data = pd.DataFrame({
         'fixed_acidity': [fixed_acidity],
@@ -27,7 +27,7 @@ def win_quality(fixed_acidity, volatile_acidity, citric_acid, residual_sugar, ch
 
     # Perform the prediction
     prediction = model.predict(data)[0]
-    return "GOOD" if prediction == 1 else "Not GOOD"
+    return "GOOD" if prediction == 1 else "NOT GOOD"
 
 # Create the input components
 input_components = [
@@ -44,7 +44,7 @@ input_components = [
 
 # Create the interface
 interface = gr.Interface(
-    fn=win_quality,
+    fn=wine_quality,
     inputs=input_components,
     outputs="text",
     title="WINE QUALITY",
